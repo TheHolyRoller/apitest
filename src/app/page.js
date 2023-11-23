@@ -6,6 +6,10 @@ import {useState, useEffect, useCallback, useRef} from 'react'
 
 export default function Home() {
 
+  const [coindeskData, setCoindeskData] = useState(null);
+
+
+
 // Add in the data here 
 const data = {
   name: "Alice",
@@ -16,30 +20,46 @@ const data = {
 };
 
 
-// Create the function here 
 function sendData() {
-  // Use axios to send a post request to the backend server
   
   console.log('trying to send data')
   axios
     .post("http://localhost:5000/server", data)
     .then((response) => {
-      // Do something with the response
-      // For example, alert the response data
       alert(JSON.stringify(response.data));
       console.log('data send'); 
       
     })
     .catch((error) => {
-      // Handle the error
-      // For example, alert the error message
       alert(error.message);
       alert("this DID NOT WORK")
       console.error("this did not work")
     });
 }
 
+function getData() {
+  // Define the URL to make the GET request
+  const url = 'http://localhost:5000/server/coindesk';
 
+  // Use axios to make a GET request to the server
+  axios.get(url)
+    .then((response) => {
+      // Get the data from the response
+      console.log('trying to get data');
+      
+      const data = response.data;
+
+      // Set the coindesk data state variable to the data
+      setCoindeskData(data);
+    })
+    .catch((error) => {
+      // Handle the error
+      // For example, alert the error message
+      console.log('this did not work');
+      console.error("this did not work")
+      alert(error.message);
+    });
+}
 
 
 
@@ -52,6 +72,12 @@ function sendData() {
         SEND 
         
       </h1>
+      </button>
+      
+      <button onClick={getData} >
+      
+      <h1>GET</h1>
+      
       </button>
       
       
