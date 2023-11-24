@@ -10,6 +10,7 @@ export default function Home() {
 
 
 
+
 // Add in the data here 
 const data = {
   name: "Alice",
@@ -20,6 +21,7 @@ const data = {
 };
 
 
+
 function sendData() {
   
   console.log('trying to send data')
@@ -27,7 +29,7 @@ function sendData() {
     .post("http://localhost:5000/server", data)
     .then((response) => {
       alert(JSON.stringify(response.data));
-      console.log('data send'); 
+      console.log('data sent'); 
       
     })
     .catch((error) => {
@@ -37,24 +39,20 @@ function sendData() {
     });
 }
 
+
 function getData() {
-  // Define the URL to make the GET request
   const url = 'http://localhost:5000/server/coindesk';
 
-  // Use axios to make a GET request to the server
   axios.get(url)
     .then((response) => {
-      // Get the data from the response
       console.log('trying to get data');
       
       const data = response.data;
 
-      // Set the coindesk data state variable to the data
       setCoindeskData(data);
-    })
+    });
+    
     .catch((error) => {
-      // Handle the error
-      // For example, alert the error message
       console.log('this did not work');
       console.error("this did not work")
       alert(error.message);
@@ -70,7 +68,6 @@ function getData() {
       
       <h1>
         SEND 
-        
       </h1>
       </button>
       
